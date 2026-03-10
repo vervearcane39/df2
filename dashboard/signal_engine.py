@@ -387,7 +387,37 @@ def build_signals(ctx: dict) -> dict:
         phase_r=phase_r)
 
     # Keep dir_bias string for backward compat
+    # Keep dir_bias string for backward compat
     dir_bias = dir_prob_r['label']
+
+    # ── Smooth move probability with EMA ──────────────────────────────────
+    _raw_prob = move_r['explosion_prob'] if 'move_r' in locals() else 50.0
+    _prob_ema = st.session_state.get('prob_ema', _raw_prob)
+    _prob_ema = 0.25 * _raw_prob + 0.75 * _prob_ema
+    st.session_state['prob_ema'] = _prob_ema
+    move_r['explosion_prob'] = round(_prob_ema, 1)
+
+    # ── Stabilise direction — must persist 3 consecutive frames ──────────
+    _raw_dir = dir_prob_r['direction']
+    _frames_up = st.session_state.get('direction_frames_up', 0)
+    _frames_dn = st.session_state.get('direction_frames_dn', 0)
+    if _raw_dir == 'UP':
+        _frames_up += 1
+        _frames_dn  = 0
+    elif _raw_dir == 'DOWN':
+        _frames_dn += 1
+        _frames_up  = 0
+    else:
+        _frames_up = max(0, _frames_up - 1)
+        _frames_dn = max(0, _frames_dn - 1)
+    st.session_state['direction_frames_up'] = _frames_up
+    st.session_state['direction_frames_dn'] = _frames_dn
+    if _frames_up >= 3:
+        dir_prob_r['direction'] = 'UP'
+    elif _frames_dn >= 3:
+        dir_prob_r['direction'] = 'DOWN'
+    else:
+        dir_prob_r['direction'] = 'NEUTRAL'
 
     return {
         'STRONG_OI': STRONG_OI, 'SLOPE_TH': SLOPE_TH,

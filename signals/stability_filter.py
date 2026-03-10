@@ -43,6 +43,8 @@ DEFAULT_MIN_FRAMES = {
     'acceleration':     2,
     'move_prob':        2,
     'phase':            3,
+    'direction_up':     3,
+    'direction_dn':     3,
 }
 
 MAX_HISTORY = 8    # strictly capped — was 10 but smaller = less memory

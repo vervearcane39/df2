@@ -30,6 +30,10 @@ DEFAULTS = {
     'india_vix':             0.0,
     'prev_india_vix':        0.0,
     'sgx_gap_pct':           0.0,
+    'slope_ema':             0.0,
+    'prob_ema':              50.0,
+    'direction_frames_up':   0,
+    'direction_frames_dn':   0,
 }
 
 def init_state():

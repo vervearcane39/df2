@@ -235,7 +235,7 @@ def focus_tab():
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 1 — Live dashboard
 # ─────────────────────────────────────────────────────────────────────────────
-@st.fragment(run_every=2)
+@st.fragment(run_every=5)
 def live_tab():
     raw = load_all(DB_PATH, lookback)
     if raw['options_df'].empty or raw['spot_df'].empty:
@@ -330,7 +330,7 @@ def live_tab():
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2 — Impact Engine  (Move Probability + Dealer Regime + Liquidity Map)
 # ─────────────────────────────────────────────────────────────────────────────
-@st.fragment(run_every=2)
+@st.fragment(run_every=5)
 def impact_engine_tab():
     raw = load_all(DB_PATH, lookback)
     if raw['options_df'].empty or raw['spot_df'].empty:
@@ -412,7 +412,7 @@ def impact_engine_tab():
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 3 — Institutional Intelligence (5 Improvements)
 # ─────────────────────────────────────────────────────────────────────────────
-@st.fragment(run_every=2)
+@st.fragment(run_every=5)
 def institutional_tab():
     raw = load_all(DB_PATH, lookback)
     if raw['options_df'].empty or raw['spot_df'].empty:
@@ -579,7 +579,7 @@ def market_control_tab():
 # ─────────────────────────────────────────────────────────────────────────────
 # TAB 2 — Hero-Zero Engine  (dedicated expiry-day view)
 # ─────────────────────────────────────────────────────────────────────────────
-@st.fragment(run_every=2)
+@st.fragment(run_every=5)
 def hero_zero_tab():
     raw = load_all(DB_PATH, lookback)
     if raw['options_df'].empty or raw['spot_df'].empty:

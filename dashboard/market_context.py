@@ -43,15 +43,15 @@ import time as _time
 
 def _dte_years() -> float:
     today    = datetime.now()
-    days_thu = (3 - today.weekday()) % 7
-    if days_thu == 0 and today.time() > dt_time(15, 30):
-        days_thu = 7
-    expiry = (today + timedelta(days=days_thu)).replace(
+    days_tue = (1 - today.weekday()) % 7
+    if days_tue == 0 and today.time() > dt_time(15, 30):
+        days_tue = 7
+    expiry = (today + timedelta(days=days_tue)).replace(
         hour=15, minute=30, second=0, microsecond=0)
     return max((expiry - today).total_seconds(), 300) / (365.25 * 24 * 3600)
 
 def _is_expiry() -> bool:
-    return datetime.now().weekday() == 3
+    return datetime.now().weekday() == 1
 
 
 def build_market_context(raw: dict, lookback_mins: int, db_path: str) -> dict:
@@ -76,6 +76,11 @@ def build_market_context(raw: dict, lookback_mins: int, db_path: str) -> dict:
     velocity   = float(rolling.std()) if len(rolling) > 1 else 1.0
     raw_slope  = (float(rolling.iloc[-1]) - float(rolling.iloc[0])) if len(rolling) > 1 else 0.0
     norm_slope = raw_slope / (velocity + 1)
+    # EMA smoothing — prevents single-tick slope flips from cascading into signals
+    _slope_ema = st.session_state.get('slope_ema', norm_slope)
+    _slope_ema = 0.3 * norm_slope + 0.7 * _slope_ema
+    st.session_state['slope_ema'] = _slope_ema
+    norm_slope = _slope_ema
     rolling_mean = float(rolling.mean())
     prev_spot  = float(spot_df.iloc[-2]['spot_price']) if len(spot_df) >= 2 else None
 

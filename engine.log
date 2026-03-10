@@ -665,3 +665,19 @@
 2026-03-10 15:19:00,004 - INFO - \U0001f4be 15:18 Spot:24278.9 Health:99% Fut:\u2705
 2026-03-10 15:20:00,018 - INFO - \U0001f4be 15:19 Spot:24274.0 Health:99% Fut:\u2705
 2026-03-10 15:20:24,406 - INFO - tearing down on exception 
+2026-03-10 16:18:06,632 - INFO - \u2705 Login OK
+2026-03-10 16:18:09,259 - INFO - \U0001f3af Map: center=24250, tracking=160 (±2000)
+2026-03-10 16:18:09,265 - INFO - \U0001f517 WebSocket connecting…
+2026-03-10 16:18:09,272 - INFO - \u23f3 Aggregator started
+2026-03-10 16:18:09,910 - INFO - Websocket connected
+2026-03-10 16:19:00,008 - INFO - \U0001f4be 16:18 Spot:24261.6 Health:100% Fut:\u2705
+2026-03-10 16:20:00,016 - INFO - \U0001f4be 16:19 Spot:24261.6 Health:100% Fut:\u2705
+2026-03-10 16:21:00,003 - INFO - \U0001f4be 16:20 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:22:00,004 - INFO - \U0001f4be 16:21 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:23:00,021 - INFO - \U0001f4be 16:22 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:24:00,005 - INFO - \U0001f4be 16:23 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:25:00,016 - INFO - \U0001f4be 16:24 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:26:00,019 - INFO - \U0001f4be 16:25 Spot:24261.6 Health:100% Fut:—
+2026-03-10 16:26:40,839 - INFO - tearing down on exception 
+2026-03-10 16:26:40,923 - ERROR - error from callback <bound method SmartWebSocketV2._on_close of <SmartApi.smartWebSocketV2.SmartWebSocketV2 object at 0x000001BE5156BD90>>: SmartWebSocketV2._on_close() takes 2 positional arguments but 4 were given
+2026-03-10 16:26:40,924 - ERROR - \U0001f525 Crash: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given. Restarting in 5s…
